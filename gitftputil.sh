@@ -10,12 +10,13 @@ then
     echo "Usage:"
     echo "⚡ $script_name <deployment>                Run the specified deployment config"
     echo "📋 $script_name ls                          List all deployments and servers"
-    echo "🌍 $script_name mk s                        Create a new server config"
-    echo "📁 $script_name mk d                        Create a new deployment config"
+    echo "🌍 $script_name mk s <name>                 Create a new server config"
+    echo "📁 $script_name mk d <name>                 Create a new deployment config"
     echo "✍️ $script_name edit s <name>               Edit specified server"
     echo "✍️ $script_name edit d <name>               Edit specifed deployment"
     echo "🗑️ $script_name rm s <name>                 Delete specified server"
-    echo "🗑️ $script_name rm d <name>                 Delete specified deployment"
+    echo "🗑️ $script_name rm d <name>                 Delete specified deplyment"
+    echo "🏷️ $script_name mv <old_deployment> <new>   Rename a deployment"
     echo "Made with ❤️ by Wanieru"
     echo "https://github.com/wanieru/gitftputil.sh/"
     exit 0
@@ -86,6 +87,17 @@ then
     fi
     echo "❌ Wrong usage."
     exit 1
+fi
+if [[ $1 = "mv" ]];
+then
+    if [[ -z "$2" ]]; then echo "❌ Wrong usage."; exit 1; fi
+    if [[ -z "$3" ]]; then echo "❌ Wrong usage."; exit 1; fi
+
+    if [ ! -f "$HOME/.config/gitftputil/deployments/$2" ]; then echo "❌ $2 doesn't exists."; exit 1; fi
+    if [ -f "$HOME/.config/gitftputil/deployments/$3" ]; then echo "❌ $3 already exists."; exit 1; fi
+    mv "$HOME/.config/gitftputil/deployments/$2" "$HOME/.config/gitftputil/deployments/$3"
+    echo "🏷️ Renamed $2 to $3"
+    exit 0
 fi
 
 if [[ $1 = "mk" ]];
