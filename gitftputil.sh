@@ -8,7 +8,7 @@ if [[ -z "$1" ]];
 then
     echo ""
     echo "Usage:"
-    echo "⚡ $script_name install                     Installs git-ftp relative to this script"
+    echo "📥 $script_name install                     Installs git-ftp relative to this script"
     echo "⚡ $script_name <deployment>                Run the specified deployment config"
     echo "📋 $script_name ls                          List all deployments and servers"
     echo "🌍 $script_name mk s <name>                 Create a new server config"
