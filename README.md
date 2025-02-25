@@ -1,5 +1,5 @@
 # gitftputil
-1. Requires `7z` and [git-ftp](https://git-ftp.github.io/) (git-ftp may be installed using `gitftputil install`)
+1. Requires `7z` and [git-ftp](https://github.com/git-ftp/git-ftp) (git-ftp may be installed using `gitftputil install`)
 2. Server configs are encrypted with AES using 7z
 2. Put `gitftputil.sh` in your path as `gitftputil`
 3. Configure a server to push to using `gitftputil mk s <server nickname>`
