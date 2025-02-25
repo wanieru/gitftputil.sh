@@ -72,7 +72,7 @@ then
             if [ ! -f "$HOME/.config/gitftputil/servers/$3" ]; then echo "❌ $3 doesn't exists."; exit 1; fi
             while true
             do
-                7za -y e "$HOME/.config/gitftputil/servers/$3"
+                7z -y e "$HOME/.config/gitftputil/servers/$3"
                 if [ "$?" -eq "0" ]; then 
                     break
                 fi
@@ -82,7 +82,7 @@ then
         chmod +x ./gitftp_server
         while true
         do
-            7za a -tzip -p -mem=AES256 "$HOME/.config/gitftputil/servers/$3.zip" "gitftp_server"
+            7z a -tzip -p -mem=AES256 "$HOME/.config/gitftputil/servers/$3.zip" "gitftp_server"
             if [ -f "$HOME/.config/gitftputil/servers/$3.zip" ]; then 
                 break 
             fi
@@ -135,7 +135,7 @@ export GIT_PASSWORD=$ftp_password" > "./gitftp_server"
         chmod +x ./gitftp_server
         while true
         do
-            7za a -tzip -p -mem=AES256 "$HOME/.config/gitftputil/servers/$3.zip" "gitftp_server"
+            7z a -tzip -p -mem=AES256 "$HOME/.config/gitftputil/servers/$3.zip" "gitftp_server"
             if [ -f "$HOME/.config/gitftputil/servers/$3.zip" ]; then 
                 break 
             fi
@@ -180,7 +180,7 @@ source "$HOME/.config/gitftputil/deployments/$1"
 
 #Check, unpack server config
 if [ ! -f "$HOME/.config/gitftputil/servers/$GIT_SERVER" ]; then echo "❌ Server $GIT_SERVER doesn't exists."; exit 1; fi
-7za e "$HOME/.config/gitftputil/servers/$GIT_SERVER"
+7z e "$HOME/.config/gitftputil/servers/$GIT_SERVER"
 if [ "$?" -ne "0" ]; then
     exit 0
 fi
