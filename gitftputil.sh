@@ -8,6 +8,7 @@ if [[ -z "$1" ]];
 then
     echo ""
     echo "Usage:"
+    echo "⚡ $script_name install                     Installs git-ftp relative to this script"
     echo "⚡ $script_name <deployment>                Run the specified deployment config"
     echo "📋 $script_name ls                          List all deployments and servers"
     echo "🌍 $script_name mk s <name>                 Create a new server config"
@@ -19,6 +20,19 @@ then
     echo "🏷️ $script_name mv <old_deployment> <new>   Rename a deployment"
     echo "Made with ❤️ by Wanieru"
     echo "https://github.com/wanieru/gitftputil.sh/"
+    exit 0
+fi
+if [[ $1 = "install" ]];
+then
+
+    if ! command -v git-ftp &>/dev/null; then
+        script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+        curl https://raw.githubusercontent.com/git-ftp/git-ftp/master/git-ftp > "$script_dir/git-ftp"
+        echo "✅ Installed git-ftp!"
+    else
+        echo "✅ git-ftp is installed!"
+    fi
+
     exit 0
 fi
 if [[ $1 = "ls" ]];
@@ -106,11 +120,12 @@ then
     then   
         if [[ -z "$3" ]]; then echo "❌ Wrong usage."; exit 1; fi
         if [ -f "$HOME/.config/gitftputil/servers/$3" ]; then echo "❌ Server already exists."; exit 1; fi
-        if [ ! -f "./gitftp_server" ]; then echo "❌ Temp file 'gitftp_server' already exists."; 
-        read -p "🌍 Ftp host: " ftp_host    
-        read -p "🔑 Ftp username: " ftp_username    
-        read -sp "🔑 Ftp password: " ftp_password    
-        echo "#Fill in this template.
+        if [ ! -f "./gitftp_server" ]; 
+        then
+            read -p "🌍 Ftp host: " ftp_host    
+            read -p "🔑 Ftp username: " ftp_username    
+            read -sp "🔑 Ftp password: " ftp_password    
+            echo "#Fill in this template.
 export GIT_URL=$ftp_host
 export GIT_USER=$ftp_username
 export GIT_PASSWORD=$ftp_password" > "./gitftp_server"
